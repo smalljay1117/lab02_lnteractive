@@ -9,6 +9,8 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    int mQuantity = 0;
+    int mPrice = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,24 +19,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        display(2);
+        displayTotalPrice();
     }
 
-    private void display(int number) {
-        TextView quantityTextView = (TextView)findViewById(R.id.quantity_text_view);
-        quantityTextView.setText(String.valueOf(number));
+    private void displayQuantity(int number) {
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        quantityTextView.setText(String.valueOf(mQuantity));
+    }
 
+    private void displayTotalPrice() {
         TextView priceTextView = (TextView)findViewById(R.id.price_text_view);
-        int price = 5;
-        int total = price * number;
+        int total = mPrice * mQuantity;
         String myString = NumberFormat.getCurrencyInstance(Locale.TAIWAN).format(total);
-        priceTextView.setText(myString);
-
+        String message = myString + (mQuantity == 0 ? "\nFree" : "\nThank you!");
+        priceTextView.setText(message);
     }
 
     public void increment(View view) {
-        int quantity = getQuantity();
-        display(++quantity);
+        displayQuantity(++mQuantity);
+        resetTotalPrice();
     }
 
     private int getQuantity() {
@@ -44,9 +47,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void decrement(View view) {
-        int quantity = getQuantity();
-        if(quantity > 0) {
-            display(--quantity);
+        if(mQuantity > 0) {
+            displayQuantity(--mQuantity);
+            resetTotalPrice();
         }
+    }
+
+    public void resetTotalPrice() {
+        TextView priceTextView = (TextView)findViewById(R.id.price_text_view);
+        priceTextView.setText("");
     }
 }
