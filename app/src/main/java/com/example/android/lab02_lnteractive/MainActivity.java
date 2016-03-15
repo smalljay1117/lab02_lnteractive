@@ -5,12 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 public class MainActivity extends AppCompatActivity {
-    int mQuantity = 0;
-    int mPrice = 5;
+    private int mQuantity = 0;
+    private int mPrice = 5;
+    private final String mNT$ = "NT$";
+    private StringBuilder mTotalPriceMessage = new StringBuilder(mNT$);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         displayTotalPrice();
     }
 
-    private void displayQuantity(int number) {
+    private void displayQuantity() {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText(String.valueOf(mQuantity));
     }
@@ -30,13 +29,16 @@ public class MainActivity extends AppCompatActivity {
     private void displayTotalPrice() {
         TextView priceTextView = (TextView)findViewById(R.id.price_text_view);
         int total = mPrice * mQuantity;
-        String myString = NumberFormat.getCurrencyInstance(Locale.TAIWAN).format(total);
-        String message = myString + (mQuantity == 0 ? "\nFree" : "\nThank you!");
-        priceTextView.setText(message);
+        int startIndex = mNT$.length();
+        int endIndex = mTotalPriceMessage.length();
+        mTotalPriceMessage.delete(startIndex,endIndex).append(total)
+                .append(mQuantity == 0 ? "\nFree" : "\nThank you!");
+        priceTextView.setText(mTotalPriceMessage);
     }
 
     public void increment(View view) {
-        displayQuantity(++mQuantity);
+        ++mQuantity;
+        displayQuantity();
         resetTotalPrice();
     }
 
@@ -48,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void decrement(View view) {
         if(mQuantity > 0) {
-            displayQuantity(--mQuantity);
+            --mQuantity;
+            displayQuantity();
             resetTotalPrice();
         }
     }
