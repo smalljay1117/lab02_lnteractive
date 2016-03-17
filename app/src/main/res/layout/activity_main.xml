@@ -14,6 +14,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16sp"
+        android:text="Toppings" />
+
+    <CheckBox
+        android:id="@+id/toppings_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16sp"
+        android:onClick="clickToppings"
+        android:paddingLeft="24sp"
+        android:text="泡菜"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16sp"
         android:text="Quantity"
         android:textAllCaps="true" />
 
