@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16sp"
-        android:onClick="clickToppings"
+        android:onClick="mediator"
         android:paddingLeft="24sp"
         android:text="泡菜"
         android:textSize="16sp" />
@@ -39,11 +39,12 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/decrement_button"
             android:layout_width="48sp"
             android:layout_height="48sp"
             android:layout_marginBottom="16sp"
             android:layout_marginRight="16sp"
-            android:onClick="decrement"
+            android:onClick="mediator"
             android:text="-" />
 
         <TextView
@@ -56,11 +57,12 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/increment_button"
             android:layout_width="48sp"
             android:layout_height="48sp"
             android:layout_marginBottom="16sp"
             android:layout_marginLeft="16sp"
-            android:onClick="increment"
+            android:onClick="mediator"
             android:text="+" />
 
     </LinearLayout>
@@ -82,10 +84,11 @@
         android:textColor="@android:color/black" />
 
     <Button
+        android:id="@+id/order_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16sp"
-        android:onClick="submitOrder"
+        android:onClick="mediator"
         android:text="Order" />
 
 </LinearLayout>

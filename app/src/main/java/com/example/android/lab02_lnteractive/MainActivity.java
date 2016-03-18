@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayPriceMessage() {
-        TextView priceTextView = (TextView)findViewById(R.id.price_text_view);
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(mPriceMessage);
     }
 
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
                 .append("加泡菜 ? ")
                 .append(checkBox.isChecked())
                 .append("\n");
-        if(mQuantity == 0) {
+        if (mQuantity == 0) {
             mPriceMessage.append("Free");
-        }else {
+        } else {
             mPriceMessage.append("Quantity: ")
                     .append(mQuantity)
                     .append("\n")
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private void clearPriceMessageString() {
         int start = 0;
         int end = mPriceMessage.length();
-        mPriceMessage.delete(start,end);
+        mPriceMessage.delete(start, end);
     }
 
     private void displayQuantity() {
@@ -74,12 +74,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void decrement(View view) {
-        if(mQuantity > 0) {
-            --mQuantity;
-            displayQuantity();
-            resetPriceMessageString();
-            displayPriceMessage();
+        if (mQuantity == 0) {
+            return;
         }
+        --mQuantity;
+        displayQuantity();
+        resetPriceMessageString();
+        displayPriceMessage();
     }
 
     public void resetPriceMessageString() {
@@ -91,5 +92,22 @@ public class MainActivity extends AppCompatActivity {
     public void clickToppings(View view) {
         resetPriceMessageString();
         displayPriceMessage();
+    }
+
+    public void mediator(View view) {
+        switch (view.getId()) {
+            case R.id.toppings_checkbox:
+                clickToppings(view);
+                break;
+            case R.id.increment_button:
+                increment(view);
+                break;
+            case R.id.decrement_button:
+                decrement(view);
+                break;
+            case R.id.order_button:
+                submitOrder(view);
+                break;
+        }
     }
 }
