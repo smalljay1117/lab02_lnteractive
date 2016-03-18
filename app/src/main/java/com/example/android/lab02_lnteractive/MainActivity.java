@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     public void increment(View view) {
         ++mQuantity;
         displayQuantity();
-        resetTotalPrice();
+        resetPriceMessageString();
         displayPriceMessage();
     }
 
@@ -77,19 +77,19 @@ public class MainActivity extends AppCompatActivity {
         if(mQuantity > 0) {
             --mQuantity;
             displayQuantity();
-            resetTotalPrice();
+            resetPriceMessageString();
             displayPriceMessage();
         }
     }
 
-    public void resetTotalPrice() {
+    public void resetPriceMessageString() {
         clearPriceMessageString();
         mPriceMessage.append("臭豆腐")
                 .append("NT$").append(mPrice);
     }
 
     public void clickToppings(View view) {
-        resetTotalPrice();
+        resetPriceMessageString();
         displayPriceMessage();
     }
 }
